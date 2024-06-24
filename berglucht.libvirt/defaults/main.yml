@@ -1,0 +1,3 @@
+---
+# defaults file for berglucht.libvirt
+libvirt_user: ubuntu

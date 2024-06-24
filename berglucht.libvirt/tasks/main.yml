@@ -1,0 +1,26 @@
+---
+# tasks file for berglucht.libvirt
+- name: Install libvirt
+  ansible.builtin.apt:
+    update_cache: true
+    package:
+      - qemu-kvm
+      - virt-manager
+      - libvirt-daemon-system
+      - virtinst
+      - libvirt-clients
+      - bridge-utils
+
+- name: Add Libvirt user to required groups
+  ansible.builtin.user:
+    user: '{{ libvirt_user }}'
+    append: true
+    groups:
+      - kvm
+      - libvirt
+ 
+- name: Enable Libvirt service
+  ansible.builtin.systemd:
+    service: libvirtd
+    enabled: true
+    state: started
